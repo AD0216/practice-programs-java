@@ -1,0 +1,72 @@
+INDEX.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import ="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+Date CreateTime=new Date(session.getCreationTime());
+Date LastTime=new Date(session.getLastAccessedTime());
+
+String user=request.getParameter("user");
+String pass=request.getParameter("pass");
+
+out.println("First_Name: "+user+"<br>");
+out.println("Last_Name: "+pass+"<br>");
+out.println("Session Id: "+session.getId()+"<br>");
+out.println("first Time: "+CreateTime+"<br>");
+out.println("Last Time: "+LastTime+"<br>");
+Cookie First_Name=new Cookie("First_Name",user);
+response.addCookie(First_Name);
+%>
+<a href="Display.jsp">new page</a>
+</body>
+</html>
+
+
+
+DISPLAY.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+Cookie[] c= null;
+c=request.getCookies();
+for(Cookie c1:c){
+	out.println("Cookie name"+c1.getName()+"<br>");
+	out.println("Cookie value"+c1.getValue()+"<br>");
+}
+%>
+</body>
+</html>
+
+
+
+
+
+TEST.html
+<!DOCTYPE html>
+<html>
+<head></head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<body>
+<form action="LAB_NEW" method="get">
+USERNAME<input type="text" name="USERNAME">
+PASSWORD<input  type="text" name="PASSWORD">
+SUBMIT<input  type="submit" value="submit">
+</form>
+</body>
+</html>
